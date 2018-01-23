@@ -1,3 +1,5 @@
+package C2070210;
+
 import java.util.Scanner;
 
 /*
