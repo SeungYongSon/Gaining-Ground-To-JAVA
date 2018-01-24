@@ -1,6 +1,6 @@
-package C4050210;
+package C5020210;
 
-public class Add {
+public abstract class Calc {
 
     int a;
     int b;
@@ -11,6 +11,6 @@ public class Add {
     }
 
     public int calculate(){
-        return a + b;
+        return 0;
     }
 }

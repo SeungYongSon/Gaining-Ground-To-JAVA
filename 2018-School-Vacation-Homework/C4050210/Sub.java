@@ -1,11 +1,16 @@
 package C4050210;
 
-public class Sub extends Calculator{
+public class Sub {
 
-    public Sub(){ }
+    int a;
+    int b;
 
-    @Override
-    public int calculate() {
-        return this.a - this.b;
+    public void setValue(int a, int b){
+        this.a = a;
+        this.b = b;
+    }
+
+    public int calculate(){
+        return a - b;
     }
 }
