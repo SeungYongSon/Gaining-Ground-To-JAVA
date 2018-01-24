@@ -15,11 +15,111 @@ package C4060210;
 
  */
 
+import java.util.Scanner;
+
 public class C4060210 {
+
+    public static int nextCustom(int i){
+        Scanner in = new Scanner(System.in);
+        int tmp;
+        while(true){
+            tmp = Integer.parseInt(in.next());
+            if(tmp >= 0 && tmp <= i){
+                return tmp;
+            }else{
+                System.out.println("잘못된 값입니다! 다시 입력해주세요!!!");
+            }
+        }
+    }
 
     public static void main(String[] args){
 
-        System.out.println("예약 <1>  , 조회 <2> , 취소 <3> , 끝내기 <4>  ");
+        Scanner in = new Scanner(System.in);
 
+        ScheduleOfPerformances[][] sh = new ScheduleOfPerformances[3][10];
+
+        for(int i = 0; i< 3; i++){
+            for(int j = 0; j< 10; j++){
+                sh[i][j] = new ScheduleOfPerformances();
+            }
+        }
+
+        while(true){
+            System.out.println("예약 <1>  , 조회 <2> , 취소 <3> , 끝내기 <4>  ");
+
+            switch (nextCustom(4)){
+                case 1:
+                    int seatN;
+                    char seat = 0;
+                    String name;
+                    int seatNum;
+                    System.out.println("(* 선택을 잘못 하셨다면 입력 부분에서 숫자 0을 입력시 처음으로 돌아갑니다. *)");
+                    System.out.println();
+                    System.out.println("좌석 등급을 선택해 주세요.");
+                    System.out.print("1. [S]    2. [A]    3. [B]  : ");
+                    seatN = nextCustom(3);
+                    if(seatN == 0) break;
+                    switch (seatN) {
+                        case 1:
+                            seat = 'S';
+                            break;
+                        case 2:
+                            seat = 'A';
+                            break;
+                        case 3:
+                            seat = 'B';
+                            break;
+                        default: seat = 0;
+                    }
+
+                    System.out.print("이름 ? : ");
+                    name = in.next();
+                    if(name.equals("0")) break;
+
+                    System.out.println("선택하신 등급의 현 좌석 상황 입니다. ___ 는 빈 자리 입니다.");
+                    System.out.println("왼쪽 부터 1 ~ 10 순으로 번호가 있으며 빈자리를 선택해 주세요.");
+
+                    System.out.print(Character.toString(seat) + " -> ");
+                    for(int i = 0; i < sh[seatN-1].length; i++) System.out.print(sh[seatN-1][i].getName() +" ");
+
+                    seatNum = nextCustom(10);
+                    if(seatN == 0) break;
+                    sh[seatN-1][seatNum-1].valueSet(name, seatNum, seat);
+                    break;
+                case 2:
+                    System.out.println("=========================================================");
+                    System.out.print("S ->  ");
+                    for(int i = 0; i < sh[0].length; i++) System.out.print(sh[0][i].getName() +" ");
+                    System.out.println();
+
+                    System.out.print("A ->  ");
+                    for(int i = 0; i < sh[1].length; i++) System.out.print(sh[1][i].getName() +" ");
+                    System.out.println();
+
+                    System.out.print("B ->  ");
+                    for(int i = 0; i < sh[2].length; i++) System.out.print(sh[2][i].getName() +" ");
+                    System.out.println();
+                    System.out.println("=========================================================");
+                    break;
+                case 3:
+                    System.out.print("예약을 취소할려면 이름을 입력하세요 : ");
+                    name = in.next();
+                    boolean found = false;
+                    for(int i = 0; i< 3; i++){
+                        for(int j = 0; j< 10; j++){
+                            if(sh[i][j].getName().equals(name)){
+                                sh[i][j] = new ScheduleOfPerformances();
+                                found = true;
+                                System.out.println("정상적으로 취소 되었습니다.");
+                            }
+                        }
+                    }
+                    if(!found) System.out.println("예약하신 분이 아닙니다!!");
+                    break;
+                case 4:
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+            }
+        }
     }
 }
