@@ -16,17 +16,14 @@ public class C7010210 {
 
     public static void main(String[] args){
 
-        Vector<Integer> vi = new Vector<Integer>();
-
-        int max;
+        Vector<Double> vi = new Vector<Double>();
 
         Scanner in = new Scanner(System.in);
         for(int i = 0; i< 10; i++){
-            vi.add(in.nextInt());
+            vi.add(new Double(in.nextDouble()));
         }
 
-        max = vi.get(0);
-
+        double max = vi.get(0);
         for(int i = 1; i < vi.size(); i++) {
             if (max < vi.get(i)) max = vi.get(i);
         }
