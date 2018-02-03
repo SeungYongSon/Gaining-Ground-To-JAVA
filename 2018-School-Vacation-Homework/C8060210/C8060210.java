@@ -40,6 +40,5 @@ public class C8060210 {
         }catch (IOException e){
             System.out.println("입출력 오류.");
         }
-
     }
 }
